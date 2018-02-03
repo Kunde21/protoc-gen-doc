@@ -3,9 +3,10 @@ package gendoc
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/pseudomuto/protoc-gen-doc/parser"
 	"sort"
 	"strings"
+
+	"github.com/pseudomuto/protoc-gen-doc/parser"
 )
 
 // Template is a type for encapsulating all the parsed files, messages, fields, enums, services, extensions, etc. into
@@ -13,6 +14,8 @@ import (
 type Template struct {
 	// The files that were parsed
 	Files []*File `json:"files"`
+	// The protobuf packages that were parsed
+	Packages *ProtoPackages `json:"packages"`
 	// Details about the scalar values and their respective types in supported languages.
 	Scalars []*ScalarValue `json:"scalarValueTypes"`
 }
@@ -20,6 +23,7 @@ type Template struct {
 // NewTemplate creates a Template object from the ParseResult.
 func NewTemplate(pr *parser.ParseResult) *Template {
 	files := make([]*File, 0, len(pr.Files))
+	pkgs := newProtoPackages()
 
 	for _, f := range pr.Files {
 		file := &File{
@@ -38,18 +42,22 @@ func NewTemplate(pr *parser.ParseResult) *Template {
 
 		for _, e := range f.Enums {
 			file.Enums = append(file.Enums, parseEnum(e))
+			pkgs = pkgs.parseEnum(e)
 		}
 
 		for _, e := range f.Extensions {
 			file.Extensions = append(file.Extensions, parseFileExtension(e))
+			pkgs = pkgs.parseExtension(e)
 		}
 
 		for _, m := range f.Messages {
 			file.Messages = append(file.Messages, parseMessage(m))
+			pkgs = pkgs.parseMessage(m)
 		}
 
 		for _, s := range f.Services {
 			file.Services = append(file.Services, parseService(s))
+			pkgs = pkgs.parseService(s)
 		}
 
 		sort.Sort(file.Enums)
@@ -60,7 +68,11 @@ func NewTemplate(pr *parser.ParseResult) *Template {
 		files = append(files, file)
 	}
 
-	return &Template{Files: files, Scalars: makeScalars()}
+	return &Template{
+		Files:    files,
+		Packages: pkgs,
+		Scalars:  makeScalars(),
+	}
 }
 
 func makeScalars() []*ScalarValue {
