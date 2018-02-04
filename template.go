@@ -15,7 +15,7 @@ type Template struct {
 	// The files that were parsed
 	Files []*File `json:"files"`
 	// The protobuf packages that were parsed
-	Packages *ProtoPackages `json:"packages"`
+	ProtoPackages ProtoPackages `json:"packages"`
 	// Details about the scalar values and their respective types in supported languages.
 	Scalars []*ScalarValue `json:"scalarValueTypes"`
 }
@@ -47,7 +47,6 @@ func NewTemplate(pr *parser.ParseResult) *Template {
 
 		for _, e := range f.Extensions {
 			file.Extensions = append(file.Extensions, parseFileExtension(e))
-			pkgs = pkgs.parseExtension(e)
 		}
 
 		for _, m := range f.Messages {
@@ -69,9 +68,9 @@ func NewTemplate(pr *parser.ParseResult) *Template {
 	}
 
 	return &Template{
-		Files:    files,
-		Packages: pkgs,
-		Scalars:  makeScalars(),
+		Files:         files,
+		ProtoPackages: pkgs,
+		Scalars:       makeScalars(),
 	}
 }
 
