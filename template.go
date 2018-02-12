@@ -187,14 +187,22 @@ type Service struct {
 
 // ServiceMethod contains details about an individual method within a service.
 type ServiceMethod struct {
-	Name             string `json:"name"`
-	Description      string `json:"description"`
-	RequestType      string `json:"requestType"`
-	RequestLongType  string `json:"requestLongType"`
-	RequestFullType  string `json:"requestFullType"`
-	ResponseType     string `json:"responseType"`
-	ResponseLongType string `json:"responseLongType"`
-	ResponseFullType string `json:"responseFullType"`
+	Name             string   `json:"name"`
+	Description      string   `json:"description"`
+	RequestType      string   `json:"requestType"`
+	RequestLongType  string   `json:"requestLongType"`
+	RequestFullType  string   `json:"requestFullType"`
+	ResponseType     string   `json:"responseType"`
+	ResponseLongType string   `json:"responseLongType"`
+	ResponseFullType string   `json:"responseFullType"`
+	Gateway          *Gateway `json:"gateway"`
+}
+
+// MethodGateway contains details about the REST gateway for an individual service method.
+type Gateway struct {
+	Method string `json:"method"`
+	Path   string `json:"path"`
+	Body   string `json:"body"`
 }
 
 // ScalarValue contains information about scalar value types in protobuf. The common use case for this type is to know
@@ -311,6 +319,14 @@ func parseService(ps *parser.Service) *Service {
 }
 
 func parseServiceMethod(pm *parser.ServiceMethod) *ServiceMethod {
+	var gw *Gateway
+	if pm.Gateway != nil {
+		gw = &Gateway{
+			Method: pm.Gateway.Method,
+			Path:   pm.Gateway.Pattern,
+			Body:   pm.Gateway.Body,
+		}
+	}
 	return &ServiceMethod{
 		Name:             pm.Name,
 		Description:      description(pm.Comment),
@@ -320,6 +336,7 @@ func parseServiceMethod(pm *parser.ServiceMethod) *ServiceMethod {
 		ResponseType:     baseName(pm.ResponseType),
 		ResponseLongType: strings.TrimPrefix(pm.ResponseType, pm.Package+"."),
 		ResponseFullType: pm.ResponseType,
+		Gateway:          gw,
 	}
 }
 

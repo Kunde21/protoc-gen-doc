@@ -2,10 +2,12 @@ package parser
 
 import (
 	"fmt"
-	"github.com/golang/protobuf/protoc-gen-go/descriptor"
 	"path"
 	"strconv"
 	"strings"
+
+	httpDesc "github.com/appscode/grpc-gateway/protoc-gen-grpc-gateway/descriptor"
+	"github.com/golang/protobuf/protoc-gen-go/descriptor"
 )
 
 const (
@@ -296,6 +298,39 @@ func (pp *protoFileParser) parseServiceMethods(sd *descriptor.ServiceDescriptorP
 			RequestType:     strings.TrimPrefix(method.GetInputType(), "."),
 			ResponseType:    strings.TrimPrefix(method.GetOutputType(), "."),
 		})
+		gw, err := httpDesc.ExtractAPIOptions(method)
+		if err != nil {
+			continue
+		}
+		var pat, method string
+		switch {
+		case gw.Pattern == nil:
+		case gw.GetGet() != "":
+			method = "GET"
+			pat = gw.GetGet()
+		case gw.GetPut() != "":
+			method = "PUT"
+			pat = gw.GetPut()
+		case gw.GetPost() != "":
+			method = "POST"
+			pat = gw.GetPost()
+		case gw.GetDelete() != "":
+			method = "DELETE"
+			pat = gw.GetDelete()
+		case gw.GetPatch() != "":
+			method = "PATCH"
+			pat = gw.GetPatch()
+		case gw.GetCustom() != nil:
+			cust := gw.GetCustom()
+			method = cust.Kind
+			pat = cust.Path
+		}
+		methods[idx].Gateway = &MethodGateway{
+			Selector: gw.Selector,
+			Method:   method,
+			Pattern:  pat,
+			Body:     gw.Body,
+		}
 	}
 
 	return methods
