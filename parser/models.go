@@ -2,6 +2,7 @@ package parser
 
 import (
 	"fmt"
+
 	"github.com/golang/protobuf/protoc-gen-go/descriptor"
 )
 
@@ -131,6 +132,15 @@ type ServiceMethod struct {
 	ServerStreaming bool
 	RequestType     string
 	ResponseType    string
+	Gateway         *MethodGateway
+}
+
+// MethodGateway contains the grpc-gateway method options.
+type MethodGateway struct {
+	Selector string
+	Method   string
+	Pattern  string
+	Body     string
 }
 
 // A Message object to encapsulate message details.
