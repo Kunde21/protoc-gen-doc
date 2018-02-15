@@ -9,7 +9,7 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/protoc-gen-go/plugin"
-	"github.com/pseudomuto/protoc-gen-doc/parser"
+	"github.com/Kunde21/protoc-gen-doc/parser"
 )
 
 // PluginOptions encapsulates options for the plugin. The type of renderer, template file, and the name of the output

@@ -10,7 +10,7 @@
 //
 //     protoc --doc_out=. --doc_opt=custom.tmpl,docs.txt protos/*.proto
 //
-// For more details, check out the README at https://github.com/pseudomuto/protoc-gen-doc
+// For more details, check out the README at https://github.com/Kunde21/protoc-gen-doc
 package main
 
 import (
@@ -20,7 +20,7 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/protoc-gen-go/plugin"
-	"github.com/pseudomuto/protoc-gen-doc"
+	"github.com/Kunde21/protoc-gen-doc"
 )
 
 func main() {

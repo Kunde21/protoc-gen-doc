@@ -9,12 +9,12 @@ It supports proto2 and proto3, and can handle having both in the same context (s
 
 ## Installation
 
-There is a Docker image available (`docker pull pseudomuto/protoc-gen-doc`) that has everything you need to generate
+There is a Docker image available (`docker pull Kunde21/protoc-gen-doc`) that has everything you need to generate
 documentation from your protos.
 
 If you'd like to install this locally, you can `go get` it.
 
-`go get -u github.com/pseudomuto/protoc-gen-doc/cmd/...`
+`go get -u github.com/Kunde21/protoc-gen-doc/cmd/...`
 
 ## Invoking the Plugin
 
@@ -37,7 +37,7 @@ You could generate HTML docs for the examples by running the following:
 docker run --rm \
   -v $(pwd)/examples/doc:/out \
   -v $(pwd)/examples/proto:/protos \
-  pseudomuto/protoc-gen-doc
+  Kunde21/protoc-gen-doc
 ```
 
 By default HTML documentation is generated in `/out/index.html` for all `.proto` files in the `/protos` volume. This can
@@ -49,7 +49,7 @@ For example, to generate Markdown for all the examples:
 docker run --rm \
   -v $(pwd)/examples/doc:/out \
   -v $(pwd)/examples/proto:/protos \
-  pseudomuto/protoc-gen-doc --doc_opt=markdown,docs.md
+  Kunde21/protoc-gen-doc --doc_opt=markdown,docs.md
 ```
 
 You can also generate documentation for a single file. This can be done by passing the file(s) to the command:
@@ -58,7 +58,7 @@ You can also generate documentation for a single file. This can be done by passi
 docker run --rm \
   -v $(pwd)/examples/doc:/out \
   -v $(pwd)/examples/proto:/protos \
-  pseudomuto/protoc-gen-doc --doc_opt=markdown,docs.md /protos/Booking.proto [OPTIONALLY LIST MORE FILES]
+  Kunde21/protoc-gen-doc --doc_opt=markdown,docs.md /protos/Booking.proto [OPTIONALLY LIST MORE FILES]
 ```
 
 You can also exclude proto files that match specific path expressions. This is done by passing a second option delimited by `:`.
@@ -68,7 +68,7 @@ For example, you can pass any number of comma separated patterns as the second o
 docker run --rm \
   -v $(pwd)/examples/doc:/out \
   -v $(pwd)/examples/proto:/protos \
-  pseudomuto/protoc-gen-doc --doc_opt=:google/*,somepath/*
+  Kunde21/protoc-gen-doc --doc_opt=:google/*,somepath/*
 ```
 
 _**Remember**_: Paths should be from within the container, not the host!
@@ -181,14 +181,14 @@ Check out the `examples` task in the [Makefile](Makefile) to see how these were 
     https//golang.org/pkg/text/template/
     "Template - The Go Programming Language"
 [custom]:
-    https://github.com/pseudomuto/protoc-gen-doc/wiki/Custom-Templates
+    https://github.com/Kunde21/protoc-gen-doc/wiki/Custom-Templates
     "Custom templates instructions"
 [html_preview]:
-    https://rawgit.com/pseudomuto/protoc-gen-doc/master/examples/doc/example.html
+    https://rawgit.com/Kunde21/protoc-gen-doc/master/examples/doc/example.html
     "HTML Example Output"
 [travis-svg]:
-    https://travis-ci.org/pseudomuto/protoc-gen-doc.svg?branch=master
+    https://travis-ci.org/Kunde21/protoc-gen-doc.svg?branch=master
     "Travis CI build status SVG"
 [travis-ci]:
-    https://travis-ci.org/pseudomuto/protoc-gen-doc
+    https://travis-ci.org/Kunde21/protoc-gen-doc
     "protoc-gen-doc at Travis CI"

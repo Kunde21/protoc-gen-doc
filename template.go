@@ -6,7 +6,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/pseudomuto/protoc-gen-doc/parser"
+	"github.com/Kunde21/protoc-gen-doc/parser"
 )
 
 // Template is a type for encapsulating all the parsed files, messages, fields, enums, services, extensions, etc. into

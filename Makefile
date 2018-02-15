@@ -42,12 +42,12 @@ docker:
 
 docker_test: docker
 	@rm -f examples/doc/*
-	@docker run --rm -v $(DOCS_DIR):/out:rw -v $(PROTOS_DIR):/protos:ro pseudomuto/protoc-gen-doc --doc_opt=docbook,example.docbook:Ignore*
-	@docker run --rm -v $(DOCS_DIR):/out:rw -v $(PROTOS_DIR):/protos:ro pseudomuto/protoc-gen-doc --doc_opt=html,example.html:Ignore*
-	@docker run --rm -v $(DOCS_DIR):/out:rw -v $(PROTOS_DIR):/protos:ro pseudomuto/protoc-gen-doc --doc_opt=json,example.json:Ignore*
-	@docker run --rm -v $(DOCS_DIR):/out:rw -v $(PROTOS_DIR):/protos:ro pseudomuto/protoc-gen-doc --doc_opt=markdown,example.md:Ignore*
+	@docker run --rm -v $(DOCS_DIR):/out:rw -v $(PROTOS_DIR):/protos:ro Kunde21/protoc-gen-doc --doc_opt=docbook,example.docbook:Ignore*
+	@docker run --rm -v $(DOCS_DIR):/out:rw -v $(PROTOS_DIR):/protos:ro Kunde21/protoc-gen-doc --doc_opt=html,example.html:Ignore*
+	@docker run --rm -v $(DOCS_DIR):/out:rw -v $(PROTOS_DIR):/protos:ro Kunde21/protoc-gen-doc --doc_opt=json,example.json:Ignore*
+	@docker run --rm -v $(DOCS_DIR):/out:rw -v $(PROTOS_DIR):/protos:ro Kunde21/protoc-gen-doc --doc_opt=markdown,example.md:Ignore*
 	@docker run --rm \
 		-v $(DOCS_DIR):/out:rw \
 		-v $(PROTOS_DIR):/protos:ro \
 		-v $(EXAMPLE_DIR)/templates:/templates:ro \
-		pseudomuto/protoc-gen-doc --doc_opt=/templates/asciidoc.tmpl,example.txt:Ignore*
+		Kunde21/protoc-gen-doc --doc_opt=/templates/asciidoc.tmpl,example.txt:Ignore*

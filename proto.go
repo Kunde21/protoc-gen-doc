@@ -3,7 +3,7 @@ package gendoc
 import (
 	"fmt"
 
-	"github.com/pseudomuto/protoc-gen-doc/parser"
+	"github.com/Kunde21/protoc-gen-doc/parser"
 )
 
 type ProtoPackages struct {

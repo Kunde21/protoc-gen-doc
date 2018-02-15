@@ -3,7 +3,7 @@ package gendoc_test
 import (
 	"bytes"
 	"fmt"
-	"github.com/pseudomuto/protoc-gen-doc"
+	"github.com/Kunde21/protoc-gen-doc"
 	"github.com/stretchr/testify/suite"
 	"testing"
 )

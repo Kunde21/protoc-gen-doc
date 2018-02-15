@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/golang/protobuf/protoc-gen-go/plugin"
-	"github.com/pseudomuto/protoc-gen-doc/parser"
-	"github.com/pseudomuto/protoc-gen-doc/test"
+	"github.com/Kunde21/protoc-gen-doc/parser"
+	"github.com/Kunde21/protoc-gen-doc/test"
 	"github.com/stretchr/testify/suite"
 )
 

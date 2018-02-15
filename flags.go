@@ -19,7 +19,7 @@ protoc --doc_out=. --doc_opt=html,index.html:google/*,somedir/* protos/*.proto
 EXAMPLE: Use a custom template
 protoc --doc_out=. --doc_opt=custom.tmpl,docs.txt protos/*.proto
 
-See https://github.com/pseudomuto/protoc-gen-doc for more details.
+See https://github.com/Kunde21/protoc-gen-doc for more details.
 `
 
 // Flags contains details about the CLI invocation of protoc-gen-doc

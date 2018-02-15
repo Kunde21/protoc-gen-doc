@@ -24,7 +24,7 @@ main() {
   local sha="${TRAVIS_COMMIT:-}"
   if [ -z "${sha}" ]; then sha=$(git rev-parse HEAD); fi
 
-  local repo="pseudomuto/protoc-gen-doc"
+  local repo="Kunde21/protoc-gen-doc"
   local version="$(grep "const VERSION" "version.go" | awk '{print $NF }' | tr -d '"')"
   local git_tag="${repo}:${sha}"
 

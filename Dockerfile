@@ -1,5 +1,5 @@
 FROM debian:jessie-slim
-LABEL maintainer="pseudomuto <david.muto@gmail.com>" protoc_version="3.3.0"
+LABEL maintainer="Kunde21 <david.muto@gmail.com>" protoc_version="3.3.0"
 
 WORKDIR /
 
