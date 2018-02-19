@@ -368,6 +368,12 @@ func description(comment string) string {
 	return comment
 }
 
+func (svc *Service) SortedMethods() orderedMethods {
+	mth := (orderedMethods)(svc.Methods)
+	sort.Sort(mth)
+	return mth
+}
+
 type orderedEnums []*Enum
 
 func (oe orderedEnums) Len() int           { return len(oe) }
@@ -391,3 +397,9 @@ type orderedServices []*Service
 func (os orderedServices) Len() int           { return len(os) }
 func (os orderedServices) Swap(i, j int)      { os[i], os[j] = os[j], os[i] }
 func (os orderedServices) Less(i, j int) bool { return os[i].LongName < os[j].LongName }
+
+type orderedMethods []*ServiceMethod
+
+func (os orderedMethods) Len() int           { return len(os) }
+func (os orderedMethods) Swap(i, j int)      { os[i], os[j] = os[j], os[i] }
+func (os orderedMethods) Less(i, j int) bool { return os[i].Name < os[j].Name }
