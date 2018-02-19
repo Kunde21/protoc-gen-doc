@@ -304,7 +304,8 @@ func (pp *protoFileParser) parseServiceMethods(sd *descriptor.ServiceDescriptorP
 		}
 		var pat, method string
 		switch {
-		case gw.Pattern == nil:
+		case gw == nil, gw.Pattern == nil:
+			continue
 		case gw.GetGet() != "":
 			method = "GET"
 			pat = gw.GetGet()

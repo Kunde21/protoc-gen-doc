@@ -2,6 +2,7 @@ package gendoc
 
 import (
 	"fmt"
+	"sort"
 
 	"github.com/Kunde21/protoc-gen-doc/parser"
 )
@@ -81,4 +82,22 @@ func (pp ProtoPackages) parseService(pe *parser.Service) ProtoPackages {
 	pkg.Services[pe.FullName()] = svc
 	pp.Services[pe.FullName()] = svc
 	return pp
+}
+
+func (pkg Package) SortedEnums() orderedEnums {
+	enm := make(orderedEnums, 0, len(pkg.Enums))
+	for _, v := range pkg.Enums {
+		enm = append(enm, v)
+	}
+	sort.Sort(enm)
+	return enm
+}
+
+func (pkg Package) SortedMessages() orderedMessages {
+	msg := make(orderedMessages, 0, len(pkg.Messages))
+	for _, v := range pkg.Messages {
+		msg = append(msg, v)
+	}
+	sort.Sort(msg)
+	return msg
 }
