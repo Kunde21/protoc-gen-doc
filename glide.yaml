@@ -1,5 +1,0 @@
-package: github.com/Kunde21/protoc-gen-doc
-import:
-- package: github.com/golang/protobuf
-  subpackages:
-  - protoc-gen-go
